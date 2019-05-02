@@ -1,0 +1,775 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139331659-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-139331659-2');
+    </script>
+
+
+  </head>
+
+  <body class="index" data-languages="[&quot;python&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="python">python</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#getting-started-with-rocketbase" class="toc-h1 toc-link" data-title="Getting Started with Rocketbase">Getting Started with Rocketbase</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#installation" class="toc-h2 toc-link" data-title="Installation">Installation</a>
+                  </li>
+                  <li>
+                    <a href="#what-are-rockets" class="toc-h2 toc-link" data-title="What are Rockets?">What are Rockets?</a>
+                  </li>
+                  <li>
+                    <a href="#why-is-this-new" class="toc-h2 toc-link" data-title="Why is this new?">Why is this new?</a>
+                  </li>
+                  <li>
+                    <a href="#what-is-part-of-a-rocket" class="toc-h2 toc-link" data-title="What is part of a Rocket?">What is part of a Rocket?</a>
+                  </li>
+                  <li>
+                    <a href="#swapping-a-model-example" class="toc-h2 toc-link" data-title="Swapping a Model example">Swapping a Model example</a>
+                  </li>
+                  <li>
+                    <a href="#code-once-use-everywhere" class="toc-h2 toc-link" data-title="Code once, use everywhere">Code once, use everywhere</a>
+                  </li>
+                  <li>
+                    <a href="#benchmarking-rockets-example" class="toc-h2 toc-link" data-title="Benchmarking Rockets example">Benchmarking Rockets example</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rocket-families" class="toc-h1 toc-link" data-title="Rocket Families">Rocket Families</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#object-detection" class="toc-h2 toc-link" data-title="Object Detection">Object Detection</a>
+                  </li>
+                  <li>
+                    <a href="#superresolution" class="toc-h2 toc-link" data-title="Superresolution">Superresolution</a>
+                  </li>
+                  <li>
+                    <a href="#image-recognition" class="toc-h2 toc-link" data-title="Image Recognition">Image Recognition</a>
+                  </li>
+                  <li>
+                    <a href="#image-segmentation" class="toc-h2 toc-link" data-title="Image Segmentation">Image Segmentation</a>
+                  </li>
+                  <li>
+                    <a href="#pose-estimation" class="toc-h2 toc-link" data-title="Pose Estimation">Pose Estimation</a>
+                  </li>
+                  <li>
+                    <a href="#style-transfer" class="toc-h2 toc-link" data-title="Style Transfer">Style Transfer</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#build-your-own-rocket" class="toc-h1 toc-link" data-title="Build your Own Rocket">Build your Own Rocket</a>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <p><img src="images/rocketbase-illustration.jpg" alt="Rocketbase illustration" /></p>
+<h1 id='introduction'>Introduction</h1>
+<p>Welcome to the Rocketbase.ai. Here you will find everything you need to know about rockets :)</p>
+<h1 id='getting-started-with-rocketbase'>Getting Started with Rocketbase</h1>
+<p>This guide shows you how to install and run Rockets using Rocketbase. </p>
+<h2 id='installation'>Installation</h2>
+<blockquote>
+<p>Run the following code as a python script to check your installation. </p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">rockethub</span> <span class="kn">import</span> <span class="n">Rocket</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'igor/esrgan'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Success!'</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>The script should return <code>Sucess</code> if everything worked.</p>
+</blockquote>
+
+<p>Rocketbase works with Python 3.6+ and is built on the PyTorch deep learning framework.</p>
+
+<p>To install rocketbase you must <a href="https://pip.pypa.io/en/stable/installing/">install PIP</a>, the python package manager, first.</p>
+
+<p>Now you can install the rocketbase PIP package using the following command in your terminal:</p>
+
+<p><code>pip install rocketbase</code></p>
+<h3 id='test-your-rocketbase-installation'>Test your Rocketbase installation</h3>
+<p>To test whether your installation was successful you can simply try to run the code we provide on the right.</p>
+<h2 id='what-are-rockets'>What are Rockets?</h2>
+<blockquote>
+<p>A simple Rocket for image superresolution:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">rockethub</span> <span class="kn">import</span> <span class="n">Rocket</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'cat.png'</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'igor/esrgan'</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+  <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+  <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+<span class="n">img_out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</code></pre>
+<p>A Rocket is a standardized and independent deep learning model. 
+On Rocketbase.ai you will find already built and pretrained Rockets for the most common use cases in computer vision. </p>
+
+<p>Each Rocket belongs to a rocketfamily such as object detection, image recognition, style transfer etc.</p>
+
+<aside class="notice">
+You must install the rocketbase PIP package first to run the examples
+</aside>
+<h2 id='why-is-this-new'>Why is this new?</h2>
+<p>There are existing places where you will find pretrained models. But usually, you end up either receiving just a frozen graph
+or a whole github repository. A graph is super lightweight, it&#39;s just a binary file with weights and modules. But unfortunately
+they are not very handy for use cases where you need to adapt that model. For example, if you need want to retrain the 
+model using transfer learning a graph comes a bit unhandy. It appears like a big chunk of black box with some layers
+and weights in a not human readable format. </p>
+
+<p>Using Github repositories helps a lot since you have access to all the layers, all the training code and and and. There
+we have already the problem with those repositories. They are often super complex and with lots of code. Understanding what
+happenes where, getting it to running to use a model can take quite some time. Based on a survey it takes more than 20%
+of the time of top people in machine learning industry and academia.</p>
+
+<p><strong><em>Todo...</em></strong></p>
+
+<table><thead>
+<tr>
+<th></th>
+<th>Tensorflow Hub</th>
+<th>Rocketbase</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Pretrained Image Recognition Models</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+
+<p>Rockets combine the pros of both, just a simple frozen graph and the full repository. You get access to all the layers as 
+in the repository. Additionally, we provide simple helper methods to pre- and postprocess data. </p>
+
+<p>All this allows you to use any Rocket with just a few lines of code.</p>
+<h2 id='what-is-part-of-a-rocket'>What is part of a Rocket?</h2>
+<blockquote>
+<p>Usually, working with Rockets consists of four parts. First, we need to land the Rocket:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'igor/esrgan'</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Now, we need to prepare the input data such that we can use PyTorch:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">input_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>After preprocessing the input we can run the Rocket:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">out_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Finally, we want to convert the raw output into a standardized output format:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">output_data</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out_tensor</span><span class="p">)</span>
+</code></pre>
+<p>In order to simplify deep learning workflows we separate the model from the code. To make the model reusable as simple as possible we package them into so called Rockets. </p>
+
+<p>As you can see in the following illustration a Rocket contains more than just the model. We also include functionality for data pre- and postprocessing. Some Rockets which are marked as retrainable also include the the loss function. </p>
+
+<p><img src="images/rocket-parts-illustration.png" alt="Rocket parts illustration" /></p>
+
+<ul>
+<li>A Rocket always contains the <code>code to build a deep learning model</code></li>
+<li>Methods for pre- and postprocessing of data</li>
+<li>File containing the <code>pretrained weights</code></li>
+<li>They have a unique identifier the so called <code>Rocket Slug</code></li>
+<li>Information about the origin of the Rocket <code>info.json</code></li>
+</ul>
+
+<aside class="notice">
+Every Rocket comes with pretrained weights but not all Rockets are retrainable
+</aside>
+<h2 id='swapping-a-model-example'>Swapping a Model example</h2>
+<blockquote>
+<p>Rockets can easily be swapped out by changing the rocket slug</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># this code uses yolov3 for object detection</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">)</span>
+
+<span class="c"># and this code uses retinanet for object detection</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'igor/retinanet'</span><span class="p">)</span>
+</code></pre>
+<p>For example, we can swap out Rockets with a single line of code. This might sound very simple. But in fact this is something unusual in deep learning. Usually, a code base is linked with one or more models. </p>
+
+<p>This allows us also to work on the deep learning model separately from the code base. The code you write can also be used for all Rockets from the same rocket family without any change. </p>
+
+<aside class="success">
+Remember - Rockets within the same family can always be swapped out
+</aside>
+<h2 id='code-once-use-everywhere'>Code once, use everywhere</h2>
+<blockquote>
+<p>Using a Rocket on different devices</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># automatically run on GPU if available, otherwise CPU</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">)</span>
+
+<span class="c"># run on CPU</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s">'CPU'</span><span class="p">)</span>
+
+<span class="c"># run on GPU</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s">'GPU'</span><span class="p">)</span>
+
+<span class="c"># run via API (you get the api url from the rocketbase.ai platform)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s">'API'</span><span class="p">)</span>
+
+</code></pre>
+<p>The standardization of a Rocket allows you to run any Rocket on a CPU or GPU. The only dependency is that the PyTorch framework has to run on the device. </p>
+
+<p>But how about running a Rocket on a less powerful device without a GPU, like a raspberry pi?</p>
+
+<p>Just add <code>API</code> as the <code>device</code> parameter of the <code>Rocket.land(..)</code> method. Your code will automatically use the Rocket via an API provided by rocketbase.ai</p>
+
+<p>The input and output of behavior the same Rocket should always match, no matter on which device you run it. This gives you a lot of additional freedom while prototyping. </p>
+
+<p>Building a deep learning prototype on a macbook and later sharing it with a friend who has a powerful GPU without any extra work suddenly becomes very easy.</p>
+
+<aside class="success">
+Remember - Rockets run on different hardware devices and be exposed as an API
+</aside>
+<h2 id='benchmarking-rockets-example'>Benchmarking Rockets example</h2>
+<blockquote>
+<p>You can use the following code to benchmark 3 different object detection Rockets in terms of processing time</p>
+</blockquote>
+<pre class="highlight python tab-python"><code>
+<span class="c"># create our list of Rockets</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">),</span> <span class="s">'yolov3'</span><span class="p">])</span>
+<span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'igor/ssd'</span><span class="p">),</span> <span class="s">'ssd'</span><span class="p">])</span>
+<span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'igor/retinanet'</span><span class="p">),</span> <span class="s">'retinanet'</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+
+  <span class="c"># track the processing time</span>
+  <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+  <span class="c"># now we can process some images with the same code</span>
+  <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">input_image</span><span class="p">)</span>
+  <span class="n">out_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+  <span class="n">list_of_bboxes</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out_tensor</span><span class="p">)</span>
+
+  <span class="c"># calculate the processing time</span>
+  <span class="n">processing_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Running Rocket {name} took {processing_time:.2f} seconds'</span><span class="p">)</span>
+</code></pre>
+<p>Rockets allow for simpler workflows for benchmarking or replacing existing deep learning models. A Rocket can always be replaced by any other Rocket from within the same Rocket family without any extra work.</p>
+
+<p>A similar approach can be taken to find the optimal model based on your data. You can train different Rockets on the same dataset without rewriting the whole code.</p>
+<h1 id='rocket-families'>Rocket Families</h1>
+<p>To further support the standardization process we group Rockets into so called rocket families. A rocket family always shares the same input/ output interface. In this section we introduce you to the different rocket families and provide you some additional information on how to use the Rockets.</p>
+<h2 id='object-detection'>Object Detection</h2>
+<p>Detecting objects in images or videos is a very common task in computer vision. To help you out solving object detection problems we provide state-of-the-art models packaged in Rockets.</p>
+
+<p><strong>Input and Output</strong></p>
+
+<p>Rockets in this family work on images. The image will automatically be resized so you don&#39;t have to worry about that. The <code>postprocess</code> method also requires the input image as additional input. We use the input image for resizing the bounding boxes to the right size and for the optional visualization.</p>
+
+<table><thead>
+<tr>
+<th>input of preprocess</th>
+<th>output of postprocess</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>PIL.Image</code></td>
+<td><code>list</code> of dictionaries with elements <br>[{<code>topLeft_x</code>, <code>topLeft_y</code>, <code>width</code>, <code>height</code>, <code>bbox_confidence</code>, <code>class_name</code>, <code>class_confidence</code>},...]</td>
+</tr>
+</tbody></table>
+
+<p><img src="images/object-detection-illustration.png" alt="Object detection illustration" /></p>
+
+<p>Additionally, we provide a simple way to visualize the output detections by setting the <code>visualize</code> flag in <code>postprocess</code> to True.</p>
+
+<p><img src="images/object-detection-visualize-illustration.png" alt="Object detection visualize illustration" /></p>
+
+<aside class="notice">
+Object detection Rockets support visualization of the results by setting `visualize=True` in the postprocess method
+</aside>
+<h3 id='counting-cups-in-an-image-using-rockets'>Counting Cups in an Image using Rockets</h3>
+<blockquote>
+<p>Count cups in an image using a Rocket</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">rockethub</span> <span class="kn">import</span> <span class="n">Rocket</span>
+
+<span class="c"># load an image using PIL</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="s">'image_with_cups.jpg'</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+
+<span class="c"># land a rocket</span>
+<span class="n">rocket</span> <span class="o">=</span> <span class="s">'lucas/yolov3'</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">rocket</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+
+<span class="c"># process the image with our rocket</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+    <span class="n">bboxes_out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+
+<span class="c"># create a counter to keep track of the cups</span>
+<span class="n">cup_counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c"># loop through all objects detected and count cups</span>
+<span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes_out</span><span class="p">:</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bbox_conf</span><span class="p">,</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">class_conf</span> <span class="o">=</span> <span class="n">bbox</span>
+  <span class="k">if</span> <span class="n">class_name</span> <span class="o">==</span> <span class="s">'cup'</span><span class="p">:</span>
+    <span class="n">cup_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'The image contains {cup_counter} cups.'</span><span class="p">)</span>
+</code></pre>
+<p>To show how we can use an object recognition Rocket we want to build a python script to count the amount of cups in an image. Think about a shared kitchen and we want to keep track how many cups are in the kitchen sink instead of the dishwasher.</p>
+
+<p><strong>Here are the parts we need:</strong> </p>
+
+<ul>
+<li>load input image</li>
+<li>a Rocket which can detect cups</li>
+<li>a mechanism to count the amount of cups</li>
+<li>print output</li>
+</ul>
+<h2 id='superresolution'>Superresolution</h2>
+<p>Turning a low resolution image into HD sounds like science fiction. But using a Rocket this can be done with just a few lines of code.</p>
+
+<p><strong>Input and Output</strong></p>
+
+<p>Rockets in this family work with images. This Rocket works fairly simple.</p>
+
+<table><thead>
+<tr>
+<th>input of preprocess</th>
+<th>output of postprocess</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>PIL.Image</code></td>
+<td><code>PIL.Image</code></td>
+</tr>
+</tbody></table>
+
+<p><img src="images/superresolution-illustration.png" alt="Superresolution illustration" /></p>
+<h3 id='selfie-improver-using-rockets'>Selfie Improver using Rockets</h3>
+<blockquote>
+<p>Improve picture quality using a Rocket</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">rockethub</span> <span class="kn">import</span> <span class="n">Rocket</span>
+
+<span class="c"># load an image using PIL</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="s">'selfie.png'</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+
+<span class="c"># land a rocket</span>
+<span class="n">rocket</span> <span class="o">=</span> <span class="s">'igor/esrgan'</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">rocket</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+
+<span class="c"># process the image with our rocket</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+    <span class="n">img_out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+
+<span class="c"># save high definition image</span>
+<span class="n">img_out</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'selfie_HD.png'</span><span class="p">)</span>
+</code></pre>
+<p>In this example we will create a <code>selfie booster</code> or simply just a python script to improve quality of an image.</p>
+
+<p><strong>Here are the parts we need:</strong> </p>
+
+<ul>
+<li>load input image</li>
+<li>a Rocket which can do superresolution</li>
+<li>save output image</li>
+</ul>
+
+<p>You will notice, that superresolution Rockets have images as both, input and output. </p>
+<h2 id='image-recognition'>Image Recognition</h2>
+<p><strong>Input and Output</strong></p>
+
+<p>Rockets in this family work with images. The output is always a list of dictionaries containing confidence score and class label sorted by confidence.</p>
+
+<table><thead>
+<tr>
+<th>input of preprocess</th>
+<th>output of postprocess</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>PIL.Image</code></td>
+<td><code>list</code> of dictionaries with elements <br>[{<code>class_name</code>, <code>class_confidence</code>},...]</td>
+</tr>
+</tbody></table>
+<h3 id='picture-sorting-using-rockets'>Picture Sorting using Rockets</h3>
+<blockquote>
+<p>Sorting pictures using image recognition Rockets</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">rockethub</span> <span class="kn">import</span> <span class="n">Rocket</span>
+
+<span class="c"># get a list of all .jpg images inside input_folder</span>
+<span class="n">list_of_imgs</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s">'input_folder/*.jpg'</span><span class="p">)</span>
+
+<span class="c"># land a rocket</span>
+<span class="n">rocket</span> <span class="o">=</span> <span class="s">'momo/resnet34'</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">rocket</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+
+<span class="c"># loop through the images</span>
+<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">list_of_imgs</span><span class="p">:</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+
+  <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+    <span class="n">img_out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+
+  <span class="c"># get class name with highest confidence</span>
+  <span class="n">class_name</span> <span class="o">=</span> <span class="n">img_out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'class_name'</span><span class="p">]</span>
+
+  <span class="c"># check if folder for this class exists</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+
+  <span class="c"># copy original picture into new folder</span>
+  <span class="n">dst_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+  <span class="n">dst_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">dst_fname</span><span class="p">)</span>
+  <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">dst_fname</span><span class="p">)</span>
+</code></pre>
+<p>Let&#39;s create a script which takes all pictures from a folder and sorts them into subfolders according to the content. We want pictures of cats to be in the <code>cat</code> folder and pictures of cars to be in the <code>car</code> folder.</p>
+<h2 id='image-segmentation'>Image Segmentation</h2>
+<p><strong>Input and Output</strong></p>
+
+<blockquote>
+<p>Class confidence values sum up to <code>1.0</code></p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="o">...</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/deeplabv2'</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+  <span class="n">out_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+  <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out_tensor</span><span class="p">)</span>
+
+<span class="c"># check sum of out for a pixel</span>
+<span class="n">coord</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c"># loop through confidences at position coord and sum up</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+  <span class="nb">sum</span> <span class="o">+=</span> <span class="n">elem</span><span class="p">[</span><span class="s">'class_confidence_2d_array'</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Sum at position {coord} is {sum}'</span><span class="p">)</span>
+</code></pre>
+<p>Image Segmentation Rockets use single Images as input. The output is a list of dictionaries containing a <code>class_name</code> and a <code>class_confidence_2d_array</code>. Together they allow you to get probabilities for each pixel in the input image to be part of a certain class.</p>
+
+<p>The <code>class_confidence_2d_array</code> is a numpy array containing values between <code>0.0</code> and <code>1.0</code> indicating the confidence. The class confidences of a specific input pixel sum up to <code>1.0</code>. </p>
+
+<table><thead>
+<tr>
+<th>input of preprocess</th>
+<th>output of postprocess</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>PIL.Image</code></td>
+<td><code>list</code> of dictionaries with elements <br>[{<code>class_name</code>, <code>class_confidence_2d_array</code>},...]</td>
+</tr>
+</tbody></table>
+<h3 id='bokeh-effect-using-rockets'>Bokeh effect using Rockets</h3>
+<p>In this example we want to create a so called <code>bokeh</code> effect as used by the newer iPhones and Skype for example. To goal is simply to blur the background of an image.</p>
+
+<blockquote>
+<p>Bokeh effect using Rockets</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span>
+<span class="kn">from</span> <span class="nn">rockethub</span> <span class="kn">import</span> <span class="n">Rocket</span>
+
+<span class="c"># load an image using PIL</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="s">'selfie.png'</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+
+<span class="c"># land a rocket</span>
+<span class="n">rocket</span> <span class="o">=</span> <span class="s">'lucas/deeplabv2'</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">rocket</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+
+<span class="c"># process the image with our rocket</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+    <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+
+<span class="c"># get the mask for person</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">output_tensor</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">elem</span><span class="p">[</span><span class="s">'class_name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Person'</span><span class="p">:</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">elem</span><span class="p">[</span><span class="s">'class_confidence_2d_array'</span><span class="p">]</span>
+    <span class="k">break</span>
+
+<span class="c"># threshold mask</span>
+<span class="n">mask</span><span class="p">[</span><span class="n">mask</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">mask</span><span class="p">[</span><span class="n">mask</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="c"># separate input image in foreground/ background</span>
+<span class="n">img_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">fg</span> <span class="o">=</span> <span class="n">img_np</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">bg</span> <span class="o">=</span> <span class="n">img_np</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="c"># blur background</span>
+<span class="n">bg</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="n">bg</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+
+<span class="c"># stich together image</span>
+<span class="n">fg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fg</span><span class="p">)</span>
+<span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">fg</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">+</span> <span class="n">bg</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c"># save bokeh image</span>
+<span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'selfie_bokeh.png'</span><span class="p">)</span>
+</code></pre><h2 id='pose-estimation'>Pose Estimation</h2>
+<p><strong><em>Todo..</em></strong></p>
+<h2 id='style-transfer'>Style Transfer</h2>
+<p><strong><em>Todo..</em></strong></p>
+<h1 id='build-your-own-rocket'>Build your Own Rocket</h1>
+<p><strong><em>Todo..</em></strong></p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
