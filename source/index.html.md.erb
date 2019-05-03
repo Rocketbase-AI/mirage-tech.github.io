@@ -17,7 +17,8 @@ search: true
 <%= image_tag "images/rocketbase-illustration.jpg" %>
 # Introduction
 
-Welcome to the Rocketbase.ai. Here you will find everything you need to know about rockets :)
+Welcome to **Rocketbase.ai**. 
+Here you will find everything you need to know about Rockets :)
 
 # Getting Started with Rocketbase
 This guide shows you how to install and run Rockets using Rocketbase. 
@@ -75,16 +76,16 @@ You must install the rocketbase PIP package first to run the examples
 
 ## Why is this new?
 
-There are existing places where you will find pretrained models. But usually, you end up either receiving just a frozen graph
-or a whole github repository. A graph is super lightweight, it's just a binary file with weights and modules. But unfortunately
-they are not very handy for use cases where you need to adapt that model. For example, if you need want to retrain the 
-model using transfer learning a graph comes a bit unhandy. It appears like a big chunk of black box with some layers
-and weights in a not human readable format. 
+There are existing places where you will find pretrained models. But you usually end up either receiving a frozen graph
+or a whole github repository. A graph is very lightweight, it's just a binary file with weights and modules. But unfortunately
+they are not very handy for use cases where you need to adapt that model. For example, if you wish to retrain the 
+model using transfer learning, a frozen graph is rather unhandy. It appears like a black box with some layers
+and weights in a non human readable format. 
 
-Using Github repositories helps a lot since you have access to all the layers, all the training code and and and. There
-we have already the problem with those repositories. They are often super complex and with lots of code. Understanding what
-happenes where, getting it to running to use a model can take quite some time. Based on a survey it takes more than 20%
-of the time of top people in machine learning industry and academia.
+Using Github repositories helps a lot since you have access to all the layers, all the training code and much more. And that's
+where the problems start. They are often complicated and uncommented collections of code. Understanding what
+happens where, getting it to run in order to use a model can take quite some time. Based on a survey, it takes experienced 
+researchers of machine learning in industry and academia more than 20% of their time to get a model to run.
 
 
 ***Todo...***
@@ -94,10 +95,10 @@ of the time of top people in machine learning industry and academia.
 |Pretrained Image Recognition Models| Yes | Yes |
 
 
-Rockets combine the pros of both, just a simple frozen graph and the full repository. You get access to all the layers as 
-in the repository. Additionally, we provide simple helper methods to pre- and postprocess data. 
+Rockets combine the advantages of both, just a simple frozen graph and the full repository. You get access to all the layers as 
+in the repository. Additionally, we provide simple helper methods to pre- and postprocess the data. 
 
-All this allows you to use any Rocket with just a few lines of code.
+All of this allows you to use any Rocket with just a few lines of code.
 
 
 ## What is part of a Rocket?
@@ -126,18 +127,19 @@ out_tensor = model(input_tensor)
 output_data = model.postprocess(out_tensor)
 ```
 
-In order to simplify deep learning workflows we separate the model from the code. To make the model reusable as simple as possible we package them into so called Rockets. 
+In order to simplify deep learning workflows we separate the model from the code. To make reusing the model as simple as possible, they are packaged into so called Rockets. 
 
-As you can see in the following illustration a Rocket contains more than just the model. We also include functionality for data pre- and postprocessing. Some Rockets which are marked as retrainable also include the the loss function. 
+As you can see in the following illustration a Rocket contains more than just the model. We also include functionality for data pre- and postprocessing. Some Rockets which are marked as retrainable also include the necessary components to retrain (e.g. loss function). 
 
 <%= image_tag "images/rocket-parts-illustration.png" %>
 
-
-* A Rocket always contains the `code to build a deep learning model`
+A Rocket always contains:
+* The `code to build a deep learning model`
 * Methods for pre- and postprocessing of data
 * File containing the `pretrained weights`
-* They have a unique identifier the so called `Rocket Slug`
 * Information about the origin of the Rocket `info.json`
+
+Every Rocket has is identified by its unique identifier, the so called `Rocket Slug`
 
 
 <aside class="notice">
@@ -146,7 +148,7 @@ Every Rocket comes with pretrained weights but not all Rockets are retrainable
 
 ## Swapping a Model example
 
-> Rockets can easily be swapped out by changing the rocket slug
+> Rockets can easily be swapped out by changing the Rocket slug
 
 ```python
 # this code uses yolov3 for object detection
@@ -156,9 +158,9 @@ model = Rocket.land('lucas/yolov3')
 model = Rocket.land('igor/retinanet')
 ```
 
-For example, we can swap out Rockets with a single line of code. This might sound very simple. But in fact this is something unusual in deep learning. Usually, a code base is linked with one or more models. 
+For example, we can swap out Rockets with a single line of code. This might sound trivial, but in fact this is something unusual in deep learning. Usually, a code base is linked with one or more models. 
 
-This allows us also to work on the deep learning model separately from the code base. The code you write can also be used for all Rockets from the same rocket family without any change. 
+This also allows us to work on the deep learning model separately from the code base. The code you write can also be used for all Rockets from the same rocket family without any change. 
 
 <aside class="success">
 Remember - Rockets within the same family can always be swapped out
@@ -179,23 +181,23 @@ model = Rocket.land('lucas/yolov3', device='CPU')
 # run on GPU
 model = Rocket.land('lucas/yolov3', device='GPU')
 
-# run via API (you get the api url from the rocketbase.ai platform)
+# run via API (you get the api url from the Rocketbase.ai platform)
 model = Rocket.land('lucas/yolov3', device='API')
 
 ```
 
 The standardization of a Rocket allows you to run any Rocket on a CPU or GPU. The only dependency is that the PyTorch framework has to run on the device. 
 
-But how about running a Rocket on a less powerful device without a GPU, like a raspberry pi?
+But how about running a Rocket on a less powerful device without a GPU, like a RaspberryPi?
 
-Just add `API` as the `device` parameter of the `Rocket.land(..)` method. Your code will automatically use the Rocket via an API provided by rocketbase.ai
+Just add `API` as the `device` parameter of the `Rocket.land(..)` method. Your code will automatically use the Rocket via an API provided by Rocketbase.ai
 
-The input and output of behavior the same Rocket should always match, no matter on which device you run it. This gives you a lot of additional freedom while prototyping. 
+The input and output of the same Rocket should always match, no matter on which device you run it. This gives you a lot of additional freedom while prototyping. 
 
-Building a deep learning prototype on a macbook and later sharing it with a friend who has a powerful GPU without any extra work suddenly becomes very easy.
+Building a deep learning prototype on a Macbook and later sharing it with a friend who has a powerful GPU without any extra work suddenly becomes very easy.
 
 <aside class="success">
-Remember - Rockets run on different hardware devices and be exposed as an API
+Remember - Rockets can run on different hardware devices and be exposed as an API
 </aside>
 
 ## Benchmarking Rockets example
@@ -226,17 +228,17 @@ for model, name in models:
   print(f'Running Rocket {name} took {processing_time:.2f} seconds')
 ```
 
-Rockets allow for simpler workflows for benchmarking or replacing existing deep learning models. A Rocket can always be replaced by any other Rocket from within the same Rocket family without any extra work.
+Rockets allow for simpler workflows for benchmarking or replacing existing deep learning models. A Rocket can always be replaced by any other Rocket from the same Rocket family without any extra work.
 
 A similar approach can be taken to find the optimal model based on your data. You can train different Rockets on the same dataset without rewriting the whole code.
 
 
 # Rocket Families
-To further support the standardization process we group Rockets into so called rocket families. A rocket family always shares the same input/ output interface. In this section we introduce you to the different rocket families and provide you some additional information on how to use the Rockets.
+To further support the standardization process we group Rockets into so called Rocket families. A Rocket family always shares the same input/output interface. In this section we introduce you to the different rocket families and provide you some additional information on how to use the Rockets.
 
 ## Object Detection
 
-Detecting objects in images or videos is a very common task in computer vision. To help you out solving object detection problems we provide state-of-the-art models packaged in Rockets.
+Detecting objects in images or videos is a very common task in computer vision. To help you out in object detection problems we provide state-of-the-art models packaged in Rockets.
 
 **Input and Output**
 
@@ -290,7 +292,7 @@ for bbox in bboxes_out:
 print(f'The image contains {cup_counter} cups.')
 ```
 
-To show how we can use an object recognition Rocket we want to build a python script to count the amount of cups in an image. Think about a shared kitchen and we want to keep track how many cups are in the kitchen sink instead of the dishwasher.
+To show how we can use an object recognition Rocket we want to build a python script to count the amount of cups in an image. Think about a shared kitchen and we want to keep track of how many cups are in the kitchen sink instead of the dishwasher.
 
 **Here are the parts we need:** 
 
@@ -304,11 +306,11 @@ To show how we can use an object recognition Rocket we want to build a python sc
 
 ## Superresolution
 
-Turning a low resolution image into HD sounds like science fiction. But using a Rocket this can be done with just a few lines of code.
+Turning a low resolution image into HD sounds like science fiction. But using a Rocket, this can be done with just a few lines of code.
 
 **Input and Output**
 
-Rockets in this family work with images. This Rocket works fairly simple.
+Rockets in this family work with images.
 
 |input of preprocess|output of postprocess|
 |--------|------------|
@@ -318,7 +320,7 @@ Rockets in this family work with images. This Rocket works fairly simple.
 <%= image_tag "images/superresolution-illustration.png" %>
 
 
-### Selfie Improver using Rockets
+### Selfie Enhancer using Rockets
 
 > Improve picture quality using a Rocket
 
@@ -330,11 +332,11 @@ from rockethub import Rocket
 image_path = 'selfie.png'
 img = Image.open(image_path).convert('RGB')
 
-# land a rocket
+# land a Rocket
 rocket = 'igor/esrgan'
 model = Rocket.land(rocket).eval()
 
-# process the image with our rocket
+# process the image with our Rocket
 with torch.no_grad():
     img_tensor = model.preprocess(img)
     out = model(img_tensor)
@@ -344,7 +346,7 @@ with torch.no_grad():
 img_out.save('selfie_HD.png')
 ```
 
-In this example we will create a `selfie booster` or simply just a python script to improve quality of an image.
+In this example we will create a `selfie enhancer` or simply a python script to improve quality of an image.
 
 **Here are the parts we need:** 
 
@@ -432,7 +434,7 @@ for elem in out:
 print(f'Sum at position {coord} is {sum}')
 ```
 
-Image Segmentation Rockets use single Images as input. The output is a list of dictionaries containing a `class_name` and a `class_confidence_2d_array`. Together they allow you to get probabilities for each pixel in the input image to be part of a certain class.
+Image Segmentation Rockets use single images as input. The output is a list of dictionaries containing a `class_name` and a `class_confidence_2d_array`. Together they allow you to get probabilities for each pixel in the input image to be part of a certain class.
 
 
 The `class_confidence_2d_array` is a numpy array containing values between `0.0` and `1.0` indicating the confidence. The class confidences of a specific input pixel sum up to `1.0`. 
@@ -444,7 +446,7 @@ The `class_confidence_2d_array` is a numpy array containing values between `0.0`
 
 ### Bokeh effect using Rockets
 
-In this example we want to create a so called `bokeh` effect as used by the newer iPhones and Skype for example. To goal is simply to blur the background of an image.
+In this example we want to create a so called `bokeh` effect as used by the newer iPhones and Skype for example. The goal is simply to blur the background of an image.
 
 > Bokeh effect using Rockets
 
