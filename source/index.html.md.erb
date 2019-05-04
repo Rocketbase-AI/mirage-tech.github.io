@@ -97,40 +97,12 @@ img_out = model.postprocess(out)
 A Rocket is a standardized and independent deep learning model. 
 On Rocketbase.ai you will find already built and pretrained Rockets for the most common use cases in computer vision. 
 
-Each Rocket belongs to a rocketfamily such as object detection, image recognition, style transfer etc.
+Each Rocket belongs to a rocketfamily such as object detection, image classification, style transfer etc.
 
 <aside class="notice">
 You must install the rocketbase PIP package first to run the examples
 </aside>
 
-<!-- ## Why is this new?
-
-There are existing places where you will find pretrained models. But you usually end up either receiving a frozen graph
-or a whole github repository. A graph is very lightweight, it's just a binary file with weights and modules. But unfortunately
-they are not very handy for use cases where you need to adapt that model. For example, if you wish to retrain the 
-model using transfer learning, a frozen graph is rather unhandy. It appears like a black box with some layers
-and weights in a non human readable format. 
-
-Using Github repositories helps a lot since you have access to all the layers, all the training code and much more. And that's
-where the problems start. They are often complicated and uncommented collections of code. Understanding what
-happens where, getting it to run in order to use a model can take quite some time. Based on a survey, it takes experienced 
-researchers of machine learning in industry and academia more than 20% of their time to get a model to run.
-
-***Todo...***
-
-| | Tensorflow Hub | Rocketbase | 
-|--|-----------------|----------|
-|Pretrained Image Recognition Models| Yes | Yes |
-
-
-Rockets combine the advantages of both, just a simple frozen graph and the full repository. You get access to all the layers as 
-in the repository. Additionally, we provide simple helper methods to pre- and postprocess the data. 
-
-All of this allows you to use any Rocket with just a few lines of code. Any Rocket can be landed by a unique `Rocket Slug`. On rocketbase.ai you find a list of publicly available Rockets and the slug to use them. You can also host your own private Rocket just as you would host a private repository on Github.
-
-<aside class="notice">
-Go to rocketbase.ai to find an overview of available Rockets
-</aside> -->
 
 ## What is part of a Rocket?
 
@@ -284,7 +256,7 @@ A similar approach can be taken to find the optimal model based on your data. Yo
 To further support the standardization process we group Rockets into so called Rocket families. A Rocket family always shares the same input/output interface. In this section we introduce you to the different rocket families and provide you some additional information on how to use the Rockets.
 
 
-## Object Detection
+## Image Object Detection
 
 Detecting objects in images or videos is a very common task in computer vision. To help you out in object detection problems we provide state-of-the-art models packaged in Rockets.
 
@@ -340,7 +312,7 @@ for bbox in bboxes_out:
 print(f'The image contains {cup_counter} cups.')
 ```
 
-To show how we can use an object recognition Rocket we want to build a python script to count the amount of cups in an image. Think about a shared kitchen and we want to keep track of how many cups are in the kitchen sink instead of the dishwasher.
+To show how we can use an object detection Rocket we want to build a python script to count the amount of cups in an image. Think about a shared kitchen and we want to keep track of how many cups are in the kitchen sink instead of the dishwasher.
 
 **Here are the parts we need:** 
 
@@ -404,7 +376,7 @@ In this example we will create a `selfie enhancer` or simply a python script to 
 
 You will notice, that superresolution Rockets have images as both, input and output. 
 
-## Image Recognition
+## Image Classification
 
 **Input and Output**
 
@@ -416,7 +388,7 @@ Rockets in this family work with images. The output is always a list of dictiona
 
 ### Picture Sorting using Rockets
 
-> Sorting pictures using image recognition Rockets
+> Sorting pictures using image classification Rockets
 
 ```python
 import os
@@ -552,7 +524,7 @@ In this example we want to create a so called `bokeh` effect as used by the newe
 
 <%= image_tag "images/bokeh-effect-illustration.png" %>
 
-## Human Pose Estimation
+## Image Human Pose Estimation
 
 In pose estimation we try to predict the pose of an entity in a scene. A typical use case is the prediction of the human body pose in an image. Pose estimation can be used for various use cases such as recognizing what a person currently is doing. 
 
