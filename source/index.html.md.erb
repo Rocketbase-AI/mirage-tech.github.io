@@ -24,19 +24,32 @@ Here you will find everything you need to know about Rockets :)
 This guide shows you how to install and run Rockets using Rocketbase. 
 
 
-## Installation
+## The rocketbase PIP package
+To easy access and management of Rockets we provide a python PIP package. The package provides you very useful methods to `land` and `launch` Rockets.
 
-> Run the following code as a python script to check your installation. 
+### Landing a Rocket
+
+> A rocket can be loaded using the `Rocket Slug`
 
 ```python
-from rockethub import Rocket
-model = Rocket.land('igor/esrgan')
-print('Success!')
+model = Rocket.land('username/modelName')
 ```
 
-> The script should return `Sucess` if everything worked.
+To use a Rocket you need to land it first. This can be done easily by using the PIP package and the desired `Rocket Slug`, a unique identifier of each Rocket. Think of it as the GitHub repository URL. 
 
-Rocketbase works with Python 3.6+ and is built on the PyTorch deep learning framework.
+The land method has two parameters, first you need to define the `Rocket Slug` to land a specific Rocket. The second parameter is optional and can be used to select the `device` on which the Rocket should run. Rockets can be run on three different devices: `CPU`, `GPU` and `API`.
+
+
+### Launching a Rocket
+At some point you might want to modify the landed Rocket or even create your own Rocket. You can push your new Rocket to the rocketbase.ai platform by using the launch functionality of the PIP package.
+
+
+<aside class="notice">
+Don't forget to replace <b>username/modelName</b> with the slug of the desired Rocket
+</aside>
+
+## Installation
+The rocketbase python package works with `Python 3.6+` and is built on the `PyTorch` deep learning framework.
 
 To install rocketbase you must [install PIP](https://pip.pypa.io/en/stable/installing/), the python package manager, first.
 
@@ -46,14 +59,25 @@ Now you can install the rocketbase PIP package using the following command in yo
 
 ### Test your Rocketbase installation
 
+> Run the following code as a python script to check your installation. 
+
+```python
+from rocketbase import Rocket
+model = Rocket.land('igor/esrgan')
+print('Success!')
+```
+
+> The script should return `Sucess` if everything worked.
+
 To test whether your installation was successful you can simply try to run the code we provide on the right.
+
 
 ## What are Rockets?
 
 > A simple Rocket for image superresolution:
 
 ```python
-from rockethub import Rocket
+from rocketbase import Rocket
 from PIL import Image
 
 img = Image.open('cat.png')
@@ -74,7 +98,7 @@ Each Rocket belongs to a rocketfamily such as object detection, image recognitio
 You must install the rocketbase PIP package first to run the examples
 </aside>
 
-## Why is this new?
+<!-- ## Why is this new?
 
 There are existing places where you will find pretrained models. But you usually end up either receiving a frozen graph
 or a whole github repository. A graph is very lightweight, it's just a binary file with weights and modules. But unfortunately
@@ -87,7 +111,6 @@ where the problems start. They are often complicated and uncommented collections
 happens where, getting it to run in order to use a model can take quite some time. Based on a survey, it takes experienced 
 researchers of machine learning in industry and academia more than 20% of their time to get a model to run.
 
-
 ***Todo...***
 
 | | Tensorflow Hub | Rocketbase | 
@@ -98,8 +121,11 @@ researchers of machine learning in industry and academia more than 20% of their 
 Rockets combine the advantages of both, just a simple frozen graph and the full repository. You get access to all the layers as 
 in the repository. Additionally, we provide simple helper methods to pre- and postprocess the data. 
 
-All of this allows you to use any Rocket with just a few lines of code.
+All of this allows you to use any Rocket with just a few lines of code. Any Rocket can be landed by a unique `Rocket Slug`. On rocketbase.ai you find a list of publicly available Rockets and the slug to use them. You can also host your own private Rocket just as you would host a private repository on Github.
 
+<aside class="notice">
+Go to rocketbase.ai to find an overview of available Rockets
+</aside> -->
 
 ## What is part of a Rocket?
 
@@ -133,7 +159,8 @@ As you can see in the following illustration a Rocket contains more than just th
 
 <%= image_tag "images/rocket-parts-illustration.png" %>
 
-A Rocket always contains:
+**A Rocket always contains:**
+
 * The `code to build a deep learning model`
 * Methods for pre- and postprocessing of data
 * File containing the `pretrained weights`
@@ -214,6 +241,11 @@ models.append([Rocket.land('igor/retinanet'), 'retinanet'])
 
 for model, name in models:
 
+  # do a `dry` run to make sure we have proper benchmarking results
+  img_tensor = model.preprocess(input_image)
+  out_tensor = model(img_tensor)
+  list_of_bboxes = model.postprocess(out_tensor)
+
   # track the processing time
   start_time = time.time()
 
@@ -230,11 +262,22 @@ for model, name in models:
 
 Rockets allow for simpler workflows for benchmarking or replacing existing deep learning models. A Rocket can always be replaced by any other Rocket from the same Rocket family without any extra work.
 
+For the example on the left we obtain the following numbers for inference time:
+
+|Rocket Name|CPU|GPU|
+|----|---|---|
+|lucas/yolov3|99.9s|99.9s|
+|igor/ssd|99.9s|99.9s|
+|igor/retinanet|99.9s|99.9s|
+
+*Note that we are only benchmarking the runtime and not the accuracy of the rockets*
+
 A similar approach can be taken to find the optimal model based on your data. You can train different Rockets on the same dataset without rewriting the whole code.
 
 
 # Rocket Families
 To further support the standardization process we group Rockets into so called Rocket families. A Rocket family always shares the same input/output interface. In this section we introduce you to the different rocket families and provide you some additional information on how to use the Rockets.
+
 
 ## Object Detection
 
@@ -264,7 +307,7 @@ Object detection Rockets support visualization of the results by setting `visual
 
 ```python
 from PIL import Image
-from rockethub import Rocket
+from rocketbase import Rocket
 
 # load an image using PIL
 image_path = 'image_with_cups.jpg'
@@ -304,7 +347,7 @@ To show how we can use an object recognition Rocket we want to build a python sc
 
 
 
-## Superresolution
+## Image Superresolution
 
 Turning a low resolution image into HD sounds like science fiction. But using a Rocket, this can be done with just a few lines of code.
 
@@ -326,7 +369,7 @@ Rockets in this family work with images.
 
 ```python
 from PIL import Image
-from rockethub import Rocket
+from rocketbase import Rocket
 
 # load an image using PIL
 image_path = 'selfie.png'
@@ -375,7 +418,7 @@ import os
 import shutil
 from glob import glob
 from PIL import Image
-from rockethub import Rocket
+from rocketbase import Rocket
 
 # get a list of all .jpg images inside input_folder
 list_of_imgs = glob('input_folder/*.jpg')
@@ -407,6 +450,9 @@ for fname in list_of_imgs:
 ```
 
 Let's create a script which takes all pictures from a folder and sorts them into subfolders according to the content. We want pictures of cats to be in the `cat` folder and pictures of cars to be in the `car` folder.
+
+<%= image_tag "images/picture-sorting-illustration.png" %>
+
 
 
 ## Image Segmentation
@@ -446,13 +492,11 @@ The `class_confidence_2d_array` is a numpy array containing values between `0.0`
 
 ### Bokeh effect using Rockets
 
-In this example we want to create a so called `bokeh` effect as used by the newer iPhones and Skype for example. The goal is simply to blur the background of an image.
-
 > Bokeh effect using Rockets
 
 ```python
 from PIL import Image, ImageFilter
-from rockethub import Rocket
+from rocketbase import Rocket
 
 # load an image using PIL
 image_path = 'selfie.png'
@@ -499,17 +543,60 @@ img = Image.fromarray(img)
 img.save('selfie_bokeh.png')
 ```
 
-## Pose Estimation
+In this example we want to create a so called `bokeh` effect as used by the newer smartphones and video chats. The goal is simply to blur the background of an image. We can do this by using a Rocket to get the segmentation mask of the person in foreground (for simplicity we assume only one person in the image). Once we have obtained this mask we can use it to add blur to the part of the image not containing the person which mostly will be the background of the image.
 
-***Todo..***
+<%= image_tag "images/bokeh-effect-illustration.png" %>
+
+## Human Pose Estimation
+
+In pose estimation we try to predict the pose of an entity in a scene. A typical use case is the prediction of the human body pose in an image. Pose estimation can be used for various use cases such as recognizing what a person currently is doing. 
+
+**Input and Output**
+Pose estimation Rockets use a single Image as input and return a list of found human poses in an image. By default the Rocket returns you a list of joints after post processing. You can also set the `visualize=True` flag to get more visual feedback which is especially useful for debugging.
+
+|input of preprocess|output of postprocess|
+|--------|------------|
+|`PIL.Image` | `list` |
 
 
 
-## Style Transfer
-
-***Todo..***
+## Image Style Transfer
 
 
-# Build your Own Rocket
+Image Style transfer Rockets can be used to transfer the style of an input `image A` to match the style of `image B`. The type of style varies depending on the specific Rocket. A style transformation can range from a simple color transformation up to replacing complete faces.
 
-***Todo..***
+**Input and Output**
+Image Style transfer Rockets have a quite simple input and output interface. Both input and output are images.
+
+|input of preprocess|output of postprocess|
+|--------|------------|
+|`PIL.Image` | `PIL.Image` |
+
+### Turning Summer into Winter
+
+> Turn summer into winter using Rockets
+
+```python
+from PIL import Image
+from rocketbase import Rocket
+
+# load an image using PIL
+image_path = 'summer-image.png'
+img = Image.open(image_path).convert('RGB')
+
+# land a Rocket
+rocket = 'igor/cycle_gan_summer2winter_yosemite'
+model = Rocket.land(rocket).eval()
+
+# process the image with our Rocket
+with torch.no_grad():
+    img_tensor = model.preprocess(img)
+    out = model(img_tensor)
+    img_out = model.postprocess(out, img)
+
+# save the winter image
+img_out.save('winter.png')
+```
+
+Here we show you the result of using `cyclegan-summer2winter-yosemite` to transfer images from summer to look like images from winter.
+<%= image_tag "images/style-transfer-illustration.png" %>
