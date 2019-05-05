@@ -48,6 +48,13 @@ The land method has two parameters, first you need to define the `Rocket Slug` t
 ### Launching a Rocket
 At some point you might want to modify the landed Rocket or even create your own Rocket. You can push your new Rocket to the rocketbase.ai platform by using the launch functionality of the PIP package.
 
+> A rocket can be launched using the `Rocket Slug`
+
+```python
+liftoff = Rocket.launch('username/modelName/<hash>')
+```
+
+To launch a rocket, you can simply use this line in the same Python file as for the previous snippet.
 
 <aside class="notice">
 Don't forget to replace <b>username/modelName</b> with the slug of the desired Rocket
@@ -203,6 +210,34 @@ Building a deep learning prototype on a Macbook and later sharing it with a frie
 <aside class="success">
 Remember - Rockets can run on different hardware devices and be exposed as an API
 </aside>
+
+
+### Example: Launch your new Rocket
+
+> Launch Rocket
+```python
+
+from rocketbase import Rocket
+
+liftoff = Rocket.launch('username/modelName/<hash>')
+
+print("Rocket successfully launched! Houston, no problemo" if liftoff else "Houston we have a problem")
+
+```
+
+Launching a Rocket to rocketbase.ai is as simple as landing one. Simply import the package and use the launch function.
+This script (launch.py) should be located next to your `rockets` folder:
+
+* My-app :
+  * rockets
+  * launch.py
+  * ...
+
+
+<aside class="notice">
+We are currently working on a simple CLI interface to make this even simpler. Coming soon...
+</aside>
+
 
 ## Benchmarking Rockets example
 
