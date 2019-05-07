@@ -79,9 +79,10 @@ To test whether your installation was successful you can simply try to run the c
 
 ## What are Rockets?
 
-> A simple Rocket for image superresolution:
+> A simple Rocket for image superresolution <span class='colab'>[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/notebook#fileId=16XVBk22GB0dbDl1PPD3Rcgc31-T2LPVZ&offline=true&sandboxMode=true)</span>
 
 ```python
+import torch
 from rocketbase import Rocket
 from PIL import Image
 
@@ -91,7 +92,7 @@ model = Rocket.land('igor/esrgan').eval()
 with torch.no_grad():
   img_tensor = model.preprocess(img)
   out = model(img_tensor)
-img_out = model.postprocess(out)
+  img_out = model.postprocess(out)
 ```
 
 A Rocket is a standardized and independent deep learning model. 
@@ -173,7 +174,8 @@ Remember - Rockets within the same family can always be swapped out
 
 ## Code once, use everywhere
 
-> Using a Rocket on different devices
+> Using a Rocket on different devices 
+
 
 ```python
 # automatically run on GPU if available, otherwise CPU
@@ -206,35 +208,37 @@ Remember - Rockets can run on different hardware devices and be exposed as an AP
 
 ## Benchmarking Rockets example
 
-> You can use the following code to benchmark 3 different object detection Rockets in terms of processing time
+> Code to benchmark 3 different object detection Rockets <span class='colab'>[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/notebook#fileId=1Afpd6XlRhoMVg_65i6ELJ67G8NBPfBHI&offline=true&sandboxMode=true)</span>
 
 ```python
-
 # create our list of Rockets
 models = []
-models.append([Rocket.land('lucas/yolov3'), 'yolov3'])
-models.append([Rocket.land('igor/ssd'), 'ssd'])
-models.append([Rocket.land('igor/retinanet'), 'retinanet'])
+models.append([Rocket.land('lucas/yolov3').eval(), 'yolov3'])
+models.append([Rocket.land('igor/retinanet-resnet101-800px').eval(), 'retinanet101'])
+models.append([Rocket.land('igor/retinanet').eval(), 'retinanet'])
 
 for model, name in models:
 
   # do a `dry` run to make sure we have proper benchmarking results
-  img_tensor = model.preprocess(input_image)
-  out_tensor = model(img_tensor)
-  list_of_bboxes = model.postprocess(out_tensor)
+  img_tensor = model.preprocess(img)
+  with torch.no_grad():
+    out_tensor = model(img_tensor)
+    img_tensor = model.preprocess(img)
+    list_of_bboxes = model.postprocess(out_tensor, img)
 
   # track the processing time
   start_time = time.time()
 
   # now we can process some images with the same code
-  img_tensor = model.preprocess(input_image)
-  out_tensor = model(img_tensor)
-  list_of_bboxes = model.postprocess(out_tensor)
+  with torch.no_grad():
+    img_tensor = model.preprocess(img)
+    out_tensor = model(img_tensor)
+    list_of_bboxes = model.postprocess(out_tensor, img)
 
   # calculate the processing time
   processing_time = time.time() - start_time
 
-  print(f'Running Rocket {name} took {processing_time:.2f} seconds')
+  print(f'Running Rocket {name} on CPU took {processing_time:.2f} seconds')
 ```
 
 Rockets allow for simpler workflows for benchmarking or replacing existing deep learning models. A Rocket can always be replaced by any other Rocket from the same Rocket family without any extra work.
@@ -243,9 +247,9 @@ For the example on the left we obtain the following numbers for inference time:
 
 |Rocket Name|CPU|GPU|
 |----|---|---|
-|lucas/yolov3|99.9s|99.9s|
-|igor/ssd|99.9s|99.9s|
-|igor/retinanet|99.9s|99.9s|
+|lucas/yolov3|1.40s|0.14s|
+|igor/retinanet101|13.73s|0.69s|
+|igor/retinanet|43.24s|0.31s|
 
 *Note that we are only benchmarking the runtime and not the accuracy of the rockets*
 
@@ -280,9 +284,10 @@ Object detection Rockets support visualization of the results by setting `visual
 
 ### Counting Cups in an Image using Rockets
 
-> Count cups in an image using a Rocket
+> Count cups in an image using a Rocket <span class='colab'>[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/notebook#fileId=1PafPVX-LZPsDic2WCSAjJnIiR6WtHhdO&offline=true&sandboxMode=true)</span>
 
 ```python
+import torch
 from PIL import Image
 from rocketbase import Rocket
 
@@ -305,7 +310,7 @@ cup_counter = 0
 
 # loop through all objects detected and count cups
 for bbox in bboxes_out:
-  x, y, w, h, bbox_conf, class_name, class_conf = bbox
+  class_name = bbox['class_name']
   if class_name == 'cup':
     cup_counter += 1
 
@@ -345,6 +350,7 @@ Rockets in this family work with images.
 > Improve picture quality using a Rocket
 
 ```python
+import torch
 from PIL import Image
 from rocketbase import Rocket
 
@@ -358,9 +364,9 @@ model = Rocket.land(rocket).eval()
 
 # process the image with our Rocket
 with torch.no_grad():
-    img_tensor = model.preprocess(img)
-    out = model(img_tensor)
-    img_out = model.postprocess(out, img)
+  img_tensor = model.preprocess(img)
+  out = model(img_tensor)
+  img_out = model.postprocess(out, img)
 
 # save high definition image
 img_out.save('selfie_HD.png')
@@ -551,7 +557,7 @@ Image Style transfer Rockets have a quite simple input and output interface. Bot
 
 ### Turning Summer into Winter
 
-> Turn summer into winter using Rockets
+> Turn summer into winter using Rockets <span class='colab'>[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/notebook#fileId=1c3h8GNz7_80-niuYEMgeX4xEI8acSl_O&offline=true&sandboxMode=true)</span>
 
 ```python
 from PIL import Image
