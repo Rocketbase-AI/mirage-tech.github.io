@@ -410,8 +410,8 @@ Remember - Rockets within the same family can always be swapped out without modi
 <span class="c"># run on CPU</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s">'CPU'</span><span class="p">)</span>
 
-<span class="c"># run on GPU</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s">'GPU'</span><span class="p">)</span>
+<span class="c"># # run on GPU</span>
+<span class="c"># model = Rocket.land('lucas/yolov3', device='GPU')</span>
 
 <span class="c"># run via API (you get the api url from the RocketBase.ai platform)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/yolov3'</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s">'API'</span><span class="p">)</span>
