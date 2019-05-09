@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: RocketBase Documentation
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - python
@@ -15,26 +15,16 @@ search: true
 ---
 
 <%= image_tag "images/rocketbase-illustration.jpg" %>
-# Introduction
 
-Welcome to **Rocketbase.ai**. 
-Here you will find everything you need to know about Rockets :)
+# Documentation
 
-# Getting Started with Rocketbase
-This guide shows you how to install and run Rockets using Rocketbase. 
-
-
-***Coming soon:***
-
-* *Transfer learning with Rockets*
-* *Using Rockets on iOS and Android*
-
-## The rocketbase PIP package
-To easy access and management of Rockets we provide a python PIP package. The package provides you very useful methods to `land` and `launch` Rockets.
+## Introduction
+Welcome to **RocketBase** documentation. 
+Here you will find information on how to use RocketBase library and how to use our pre-trained Rockets.
 
 ### Landing a Rocket
 
-> A rocket can be loaded using the `Rocket Slug`
+> A Rocket can be loaded using its `Rocket Slug`
 
 ```python
 model = Rocket.land('username/modelName')
@@ -42,27 +32,32 @@ model = Rocket.land('username/modelName')
 
 To use a Rocket you need to land it first. This can be done easily by using the PIP package and the desired `Rocket Slug`, a unique identifier of each Rocket. Think of it as the GitHub repository URL. 
 
-The land method has two parameters, first you need to define the `Rocket Slug` to land a specific Rocket. The second parameter is optional and can be used to select the `device` on which the Rocket should run. Rockets can be run on three different devices: `CPU`, `GPU` and `API`.
+The land method has two parameters, first you need to define the `Rocket Slug` to land a specific Rocket. The second parameter is optional and can be used to select the `device` on which the Rocket should run. Rockets can be run on three different devices: `CPU`, `GPU` and `API`. `CPU`is the default device where the Rocket will run.
 
 
 ### Launching a Rocket
-At some point you might want to modify the landed Rocket or even create your own Rocket. You can push your new Rocket to the rocketbase.ai platform by using the launch functionality of the PIP package.
+At some point you might want to modify the landed Rocket or even create your own Rocket. You can push your new Rocket to the RocketBase.ai platform by using the launch functionality of the PIP package. This feature is in private beta at the moment. We will notify you when you can start using it. If you would like to join the private beta please send us an email at [rocketbase@mirage.id](mailto:rocketbase@mirage.id).
 
 
 <aside class="notice">
 Don't forget to replace <b>username/modelName</b> with the slug of the desired Rocket
 </aside>
 
+***Features coming soon:***
+
+* *Transfer learning with Rockets*
+* *Using Rockets on iOS and Android*
+
 ## Installation
-The rocketbase python package works with `Python 3.6+` and is built on the `PyTorch` deep learning framework.
+The RocketBase python package works with `Python 3.6+` and is built on the `PyTorch` deep learning framework.
 
-To install rocketbase you must [install PIP](https://pip.pypa.io/en/stable/installing/), the python package manager, first.
+To install RocketBase you must first [install PIP](https://pip.pypa.io/en/stable/installing/).
 
-Now you can install the rocketbase PIP package using the following command in your terminal:
+After that, you can install the RocketBase PIP package using the following command in your terminal:
 
 `pip install rocketbase`
 
-### Test your Rocketbase installation
+### Test your RocketBase installation
 
 > Run the following code as a python script to check your installation. 
 
@@ -76,12 +71,12 @@ print('Success!')
 
 To test whether your installation was successful you can simply try to run the code we provide on the right.
 
-
 ## What are Rockets?
 
-> A simple Rocket for image superresolution:
+> A simple Rocket for image superresolution <span class='colab'><a target="_blank" href="https://colab.research.google.com/notebook#fileId=16XVBk22GB0dbDl1PPD3Rcgc31-T2LPVZ&amp;offline=true&amp;sandboxMode=true"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></span>
 
 ```python
+import torch
 from rocketbase import Rocket
 from PIL import Image
 
@@ -91,18 +86,13 @@ model = Rocket.land('igor/esrgan').eval()
 with torch.no_grad():
   img_tensor = model.preprocess(img)
   out = model(img_tensor)
-img_out = model.postprocess(out)
+  img_out = model.postprocess(out)
 ```
 
-A Rocket is a standardized and independent deep learning model. 
-On Rocketbase.ai you will find already built and pretrained Rockets for the most common use cases in computer vision. 
+A Rocket is a Deep Learning container packaging a standardized and independent deep learning model. 
+On RocketBase.ai you will find already built and pretrained Rockets for the most common use cases in computer vision. 
 
-Each Rocket belongs to a rocketfamily such as object detection, image classification, style transfer etc.
-
-<aside class="notice">
-You must install the rocketbase PIP package first to run the examples
-</aside>
-
+Each Rocket belongs to a Rocket family such as object detection, image classification, style transfer etc.
 
 ## What is part of a Rocket?
 
@@ -139,11 +129,11 @@ As you can see in the following illustration a Rocket contains more than just th
 **A Rocket always contains:**
 
 * The `code to build a deep learning model`
-* Methods for pre- and postprocessing of data
+* Methods for pre- and postprocessing the data
 * File containing the `pretrained weights`
 * Information about the origin of the Rocket `info.json`
 
-Every Rocket has is identified by its unique identifier, the so called `Rocket Slug`
+Every Rocket is identified by its unique identifier, the so called `Rocket Slug`
 
 
 <aside class="notice">
@@ -164,16 +154,17 @@ model = Rocket.land('igor/retinanet')
 
 For example, we can swap out Rockets with a single line of code. This might sound trivial, but in fact this is something unusual in deep learning. Usually, a code base is linked with one or more models. 
 
-This also allows us to work on the deep learning model separately from the code base. The code you write can also be used for all Rockets from the same rocket family without any change. 
+This also allows us to work on the deep learning model separately from the code base. The code you write can also be used for all Rockets from the same Rocket family without any change. 
 
 <aside class="success">
-Remember - Rockets within the same family can always be swapped out
+Remember - Rockets within the same family can always be swapped out without modifying your code.
 </aside>
 
 
 ## Code once, use everywhere
 
-> Using a Rocket on different devices
+> Using a Rocket on different devices 
+
 
 ```python
 # automatically run on GPU if available, otherwise CPU
@@ -185,7 +176,7 @@ model = Rocket.land('lucas/yolov3', device='CPU')
 # run on GPU
 model = Rocket.land('lucas/yolov3', device='GPU')
 
-# run via API (you get the api url from the Rocketbase.ai platform)
+# run via API (you get the api url from the RocketBase.ai platform)
 model = Rocket.land('lucas/yolov3', device='API')
 
 ```
@@ -194,7 +185,7 @@ The standardization of a Rocket allows you to run any Rocket on a CPU or GPU. Th
 
 But how about running a Rocket on a less powerful device without a GPU, like a RaspberryPi?
 
-Just add `API` as the `device` parameter of the `Rocket.land(..)` method. Your code will automatically use the Rocket via an API provided by Rocketbase.ai
+Just add `API` as the `device` parameter of the `Rocket.land(..)` method. Your code will automatically use the Rocket via an API provided by RocketBase.ai
 
 The input and output of the same Rocket should always match, no matter on which device you run it. This gives you a lot of additional freedom while prototyping. 
 
@@ -206,35 +197,37 @@ Remember - Rockets can run on different hardware devices and be exposed as an AP
 
 ## Benchmarking Rockets example
 
-> You can use the following code to benchmark 3 different object detection Rockets in terms of processing time
+> Code to benchmark 3 different object detection Rockets <span class='colab'><a target="_blank" href="https://colab.research.google.com/notebook#fileId=1Afpd6XlRhoMVg_65i6ELJ67G8NBPfBHI&offline=true&sandboxMode=true"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></span>
 
 ```python
-
 # create our list of Rockets
 models = []
-models.append([Rocket.land('lucas/yolov3'), 'yolov3'])
-models.append([Rocket.land('igor/ssd'), 'ssd'])
-models.append([Rocket.land('igor/retinanet'), 'retinanet'])
+models.append([Rocket.land('lucas/yolov3').eval(), 'yolov3'])
+models.append([Rocket.land('igor/retinanet-resnet101-800px').eval(), 'retinanet101'])
+models.append([Rocket.land('igor/retinanet').eval(), 'retinanet'])
 
 for model, name in models:
 
   # do a `dry` run to make sure we have proper benchmarking results
-  img_tensor = model.preprocess(input_image)
-  out_tensor = model(img_tensor)
-  list_of_bboxes = model.postprocess(out_tensor)
+  img_tensor = model.preprocess(img)
+  with torch.no_grad():
+    out_tensor = model(img_tensor)
+    img_tensor = model.preprocess(img)
+    list_of_bboxes = model.postprocess(out_tensor, img)
 
   # track the processing time
   start_time = time.time()
 
   # now we can process some images with the same code
-  img_tensor = model.preprocess(input_image)
-  out_tensor = model(img_tensor)
-  list_of_bboxes = model.postprocess(out_tensor)
+  with torch.no_grad():
+    img_tensor = model.preprocess(img)
+    out_tensor = model(img_tensor)
+    list_of_bboxes = model.postprocess(out_tensor, img)
 
   # calculate the processing time
   processing_time = time.time() - start_time
 
-  print(f'Running Rocket {name} took {processing_time:.2f} seconds')
+  print(f'Running Rocket {name} on CPU took {processing_time:.2f} seconds')
 ```
 
 Rockets allow for simpler workflows for benchmarking or replacing existing deep learning models. A Rocket can always be replaced by any other Rocket from the same Rocket family without any extra work.
@@ -243,17 +236,17 @@ For the example on the left we obtain the following numbers for inference time:
 
 |Rocket Name|CPU|GPU|
 |----|---|---|
-|lucas/yolov3|99.9s|99.9s|
-|igor/ssd|99.9s|99.9s|
-|igor/retinanet|99.9s|99.9s|
+|lucas/yolov3|1.40s|0.14s|
+|igor/retinanet101|13.73s|0.69s|
+|igor/retinanet|43.24s|0.31s|
 
-*Note that we are only benchmarking the runtime and not the accuracy of the rockets*
+*Note that we are only benchmarking the runtime and not the accuracy of the Rockets*
 
 A similar approach can be taken to find the optimal model based on your data. You can train different Rockets on the same dataset without rewriting the whole code.
 
 
 # Rocket Families
-To further support the standardization process we group Rockets into so called Rocket families. A Rocket family always shares the same input/output interface. In this section we introduce you to the different rocket families and provide you some additional information on how to use the Rockets.
+To further support the standardization process we group Rockets into so called Rocket families. A Rocket family always shares the same input/output interface. In this section we introduce you to the different Rocket families and provide you some additional information on how to use the Rockets.
 
 
 ## Image Object Detection
@@ -280,9 +273,10 @@ Object detection Rockets support visualization of the results by setting `visual
 
 ### Counting Cups in an Image using Rockets
 
-> Count cups in an image using a Rocket
+> Count cups in an image using a Rocket <span class='colab'><a target="_blank" href="https://colab.research.google.com/notebook#fileId=1PafPVX-LZPsDic2WCSAjJnIiR6WtHhdO&offline=true&sandboxMode=true"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></span>
 
 ```python
+import torch
 from PIL import Image
 from rocketbase import Rocket
 
@@ -290,11 +284,11 @@ from rocketbase import Rocket
 image_path = 'image_with_cups.jpg'
 img = Image.open(image_path).convert('RGB')
 
-# land a rocket
+# land the Rocekt
 rocket = 'lucas/yolov3'
 model = Rocket.land(rocket).eval()
 
-# process the image with our rocket
+# process the image with our Rocket
 with torch.no_grad():
     img_tensor = model.preprocess(img)
     out = model(img_tensor)
@@ -305,7 +299,7 @@ cup_counter = 0
 
 # loop through all objects detected and count cups
 for bbox in bboxes_out:
-  x, y, w, h, bbox_conf, class_name, class_conf = bbox
+  class_name = bbox['class_name']
   if class_name == 'cup':
     cup_counter += 1
 
@@ -345,6 +339,7 @@ Rockets in this family work with images.
 > Improve picture quality using a Rocket
 
 ```python
+import torch
 from PIL import Image
 from rocketbase import Rocket
 
@@ -352,15 +347,15 @@ from rocketbase import Rocket
 image_path = 'selfie.png'
 img = Image.open(image_path).convert('RGB')
 
-# land a Rocket
+# land the Rocekt
 rocket = 'igor/esrgan'
 model = Rocket.land(rocket).eval()
 
 # process the image with our Rocket
 with torch.no_grad():
-    img_tensor = model.preprocess(img)
-    out = model(img_tensor)
-    img_out = model.postprocess(out, img)
+  img_tensor = model.preprocess(img)
+  out = model(img_tensor)
+  img_out = model.postprocess(out, img)
 
 # save high definition image
 img_out.save('selfie_HD.png')
@@ -400,7 +395,7 @@ from rocketbase import Rocket
 # get a list of all .jpg images inside input_folder
 list_of_imgs = glob('input_folder/*.jpg')
 
-# land a rocket
+# land the Rocekt
 rocket = 'momo/resnet34'
 model = Rocket.land(rocket).eval()
 
@@ -479,11 +474,11 @@ from rocketbase import Rocket
 image_path = 'selfie.png'
 img = Image.open(image_path).convert('RGB')
 
-# land a rocket
+# land the Rocket
 rocket = 'lucas/deeplabv2'
 model = Rocket.land(rocket).eval()
 
-# process the image with our rocket
+# process the image with our Rocket
 with torch.no_grad():
     img_tensor = model.preprocess(img)
     out = model(img_tensor)
@@ -551,7 +546,7 @@ Image Style transfer Rockets have a quite simple input and output interface. Bot
 
 ### Turning Summer into Winter
 
-> Turn summer into winter using Rockets
+> Turn summer into winter using Rockets <span class='colab'><a target="_blank" href="https://colab.research.google.com/notebook#fileId=1c3h8GNz7_80-niuYEMgeX4xEI8acSl_O&offline=true&sandboxMode=true"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></span>
 
 ```python
 from PIL import Image
@@ -561,7 +556,7 @@ from rocketbase import Rocket
 image_path = 'summer-image.png'
 img = Image.open(image_path).convert('RGB')
 
-# land a Rocket
+# land the Rocket
 rocket = 'igor/cycle_gan_summer2winter_yosemite'
 model = Rocket.land(rocket).eval()
 

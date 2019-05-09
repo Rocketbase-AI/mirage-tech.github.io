@@ -613,3 +613,15 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
+
+
+// custom stuff
+
+// push colab link to right
+.colab {
+  float: right;
+}
+// make sure our colab link has no bottom border
+.colab > a {
+  border-bottom: none !important;
+}
