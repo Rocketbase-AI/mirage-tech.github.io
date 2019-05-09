@@ -266,15 +266,6 @@
                     <a href="#image-superresolution" class="toc-h2 toc-link" data-title="Image Superresolution">Image Superresolution</a>
                   </li>
                   <li>
-                    <a href="#image-classification" class="toc-h2 toc-link" data-title="Image Classification">Image Classification</a>
-                  </li>
-                  <li>
-                    <a href="#image-segmentation" class="toc-h2 toc-link" data-title="Image Segmentation">Image Segmentation</a>
-                  </li>
-                  <li>
-                    <a href="#image-human-pose-estimation" class="toc-h2 toc-link" data-title="Image Human Pose Estimation">Image Human Pose Estimation</a>
-                  </li>
-                  <li>
                     <a href="#image-style-transfer" class="toc-h2 toc-link" data-title="Image Style Transfer">Image Style Transfer</a>
                   </li>
               </ul>
@@ -632,172 +623,167 @@ Object detection Rockets support visualization of the results by setting `visual
 </ul>
 
 <p>You will notice, that superresolution Rockets have images as both, input and output. </p>
-<h2 id='image-classification'>Image Classification</h2>
-<p><strong>Input and Output</strong></p>
 
-<p>Rockets in this family work with images. The output is always a list of dictionaries containing confidence score and class label sorted by confidence.</p>
+<!-- ## Image Classification
 
-<table><thead>
-<tr>
-<th>input of preprocess</th>
-<th>output of postprocess</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>PIL.Image</code></td>
-<td><code>list</code> of dictionaries with elements <br>[{<code>class_name</code>, <code>class_confidence</code>},...]</td>
-</tr>
-</tbody></table>
-<h3 id='picture-sorting-using-rockets'>Picture Sorting using Rockets</h3>
-<blockquote>
-<p>Sorting pictures using image classification Rockets</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">rocketbase</span> <span class="kn">import</span> <span class="n">Rocket</span>
+**Input and Output**
 
-<span class="c"># get a list of all .jpg images inside input_folder</span>
-<span class="n">list_of_imgs</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s">'input_folder/*.jpg'</span><span class="p">)</span>
+Rockets in this family work with images. The output is always a list of dictionaries containing confidence score and class label sorted by confidence.
 
-<span class="c"># land the Rocekt</span>
-<span class="n">rocket</span> <span class="o">=</span> <span class="s">'momo/resnet34'</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">rocket</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+|input of preprocess|output of postprocess|
+|--------|------------|
+|`PIL.Image` | `list` of dictionaries with elements <br>[{`class_name`, `class_confidence`},...]|
 
-<span class="c"># loop through the images</span>
-<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">list_of_imgs</span><span class="p">:</span>
-  <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+### Picture Sorting using Rockets
 
-  <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
-    <span class="n">img_out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+> Sorting pictures using image classification Rockets
 
-  <span class="c"># get class name with highest confidence</span>
-  <span class="n">class_name</span> <span class="o">=</span> <span class="n">img_out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'class_name'</span><span class="p">]</span>
+```python
+import os
+import shutil
+from glob import glob
+from PIL import Image
+from rocketbase import Rocket
 
-  <span class="c"># check if folder for this class exists</span>
-  <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+# get a list of all .jpg images inside input_folder
+list_of_imgs = glob('input_folder/*.jpg')
 
-  <span class="c"># copy original picture into new folder</span>
-  <span class="n">dst_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-  <span class="n">dst_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">dst_fname</span><span class="p">)</span>
-  <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">dst_fname</span><span class="p">)</span>
-</code></pre>
-<p>Let&#39;s create a script which takes all pictures from a folder and sorts them into subfolders according to the content. We want pictures of cats to be in the <code>cat</code> folder and pictures of cars to be in the <code>car</code> folder.</p>
+# land the Rocekt
+rocket = 'momo/resnet34'
+model = Rocket.land(rocket).eval()
 
-<p><img src="images/picture-sorting-illustration.png" alt="Picture sorting illustration" /></p>
-<h2 id='image-segmentation'>Image Segmentation</h2>
-<p><strong>Input and Output</strong></p>
+# loop through the images
+for fname in list_of_imgs:
+  img = Image.open(image_path).convert('RGB')
 
-<blockquote>
-<p>Class confidence values sum up to <code>1.0</code></p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="o">...</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="s">'lucas/deeplabv2'</span><span class="p">)</span>
+  with torch.no_grad():
+    img_tensor = model.preprocess(img)
+    out = model(img_tensor)
+    img_out = model.postprocess(out, img)
+  
+  # get class name with highest confidence
+  class_name = img_out[0]['class_name']
 
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-  <span class="n">out_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
-  <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out_tensor</span><span class="p">)</span>
+  # check if folder for this class exists
+  if not os.path.exists(dir_name):
+    os.makedirs(dir_name)
 
-<span class="c"># check sum of out for a pixel</span>
-<span class="n">coord</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+  # copy original picture into new folder
+  dst_fname = os.path.basename(fname)
+  dst_fname = os.path.join(class_name, dst_fname)
+  shutil.copyfile(fname, dst_fname)
+```
 
-<span class="c"># loop through confidences at position coord and sum up</span>
-<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
-  <span class="nb">sum</span> <span class="o">+=</span> <span class="n">elem</span><span class="p">[</span><span class="s">'class_confidence_2d_array'</span><span class="p">]</span>
+Let's create a script which takes all pictures from a folder and sorts them into subfolders according to the content. We want pictures of cats to be in the `cat` folder and pictures of cars to be in the `car` folder.
 
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Sum at position {coord} is {sum}'</span><span class="p">)</span>
-</code></pre>
-<p>Image Segmentation Rockets use single images as input. The output is a list of dictionaries containing a <code>class_name</code> and a <code>class_confidence_2d_array</code>. Together they allow you to get probabilities for each pixel in the input image to be part of a certain class.</p>
+<img src="images/picture-sorting-illustration.png" alt="Picture sorting illustration" />
 
-<p>The <code>class_confidence_2d_array</code> is a numpy array containing values between <code>0.0</code> and <code>1.0</code> indicating the confidence. The class confidences of a specific input pixel sum up to <code>1.0</code>. </p>
 
-<table><thead>
-<tr>
-<th>input of preprocess</th>
-<th>output of postprocess</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>PIL.Image</code></td>
-<td><code>list</code> of dictionaries with elements <br>[{<code>class_name</code>, <code>class_confidence_2d_array</code>},...]</td>
-</tr>
-</tbody></table>
-<h3 id='bokeh-effect-using-rockets'>Bokeh effect using Rockets</h3>
-<blockquote>
-<p>Bokeh effect using Rockets</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span>
-<span class="kn">from</span> <span class="nn">rocketbase</span> <span class="kn">import</span> <span class="n">Rocket</span>
 
-<span class="c"># load an image using PIL</span>
-<span class="n">image_path</span> <span class="o">=</span> <span class="s">'selfie.png'</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+## Image Segmentation
 
-<span class="c"># land the Rocket</span>
-<span class="n">rocket</span> <span class="o">=</span> <span class="s">'lucas/deeplabv2'</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Rocket</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">rocket</span><span class="p">)</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+**Input and Output**
 
-<span class="c"># process the image with our Rocket</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
-    <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+> Class confidence values sum up to `1.0`
 
-<span class="c"># get the mask for person</span>
-<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">output_tensor</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">elem</span><span class="p">[</span><span class="s">'class_name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Person'</span><span class="p">:</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">elem</span><span class="p">[</span><span class="s">'class_confidence_2d_array'</span><span class="p">]</span>
-    <span class="k">break</span>
+```python
+...
+model = Rocket.land('lucas/deeplabv2')
 
-<span class="c"># threshold mask</span>
-<span class="n">mask</span><span class="p">[</span><span class="n">mask</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">mask</span><span class="p">[</span><span class="n">mask</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+with torch.no_grad():
+  out_tensor = model(input_tensor)
+  out = model.postprocess(out_tensor)
 
-<span class="c"># separate input image in foreground/ background</span>
-<span class="n">img_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<span class="n">fg</span> <span class="o">=</span> <span class="n">img_np</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">bg</span> <span class="o">=</span> <span class="n">img_np</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">mask</span><span class="p">]</span>
+# check sum of out for a pixel
+coord = [0,0]
+sum = 0.0
 
-<span class="c"># blur background</span>
-<span class="n">bg</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
-<span class="n">bg</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+# loop through confidences at position coord and sum up
+for elem in out:
+  sum += elem['class_confidence_2d_array']
 
-<span class="c"># stich together image</span>
-<span class="n">fg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fg</span><span class="p">)</span>
-<span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+print(f'Sum at position {coord} is {sum}')
+```
 
-<span class="n">img</span> <span class="o">=</span> <span class="n">fg</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">+</span> <span class="n">bg</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+Image Segmentation Rockets use single images as input. The output is a list of dictionaries containing a `class_name` and a `class_confidence_2d_array`. Together they allow you to get probabilities for each pixel in the input image to be part of a certain class.
 
-<span class="c"># save bokeh image</span>
-<span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'selfie_bokeh.png'</span><span class="p">)</span>
-</code></pre>
-<p>In this example we want to create a so called <code>bokeh</code> effect as used by the newer smartphones and video chats. The goal is simply to blur the background of an image. We can do this by using a Rocket to get the segmentation mask of the person in foreground (for simplicity we assume only one person in the image). Once we have obtained this mask we can use it to add blur to the part of the image not containing the person which mostly will be the background of the image.</p>
 
-<p><img src="images/bokeh-effect-illustration.png" alt="Bokeh effect illustration" /></p>
-<h2 id='image-human-pose-estimation'>Image Human Pose Estimation</h2>
-<p>In pose estimation we try to predict the pose of an entity in a scene. A typical use case is the prediction of the human body pose in an image. Pose estimation can be used for various use cases such as recognizing what a person currently is doing. </p>
+The `class_confidence_2d_array` is a numpy array containing values between `0.0` and `1.0` indicating the confidence. The class confidences of a specific input pixel sum up to `1.0`. 
 
-<p><strong>Input and Output</strong>
-Pose estimation Rockets use a single Image as input and return a list of found human poses in an image. By default the Rocket returns you a list of joints after post processing. You can also set the <code>visualize=True</code> flag to get more visual feedback which is especially useful for debugging.</p>
+|input of preprocess|output of postprocess|
+|--------|------------|
+|`PIL.Image` | `list` of dictionaries with elements <br>[{`class_name`, `class_confidence_2d_array`},...]|
 
-<table><thead>
-<tr>
-<th>input of preprocess</th>
-<th>output of postprocess</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>PIL.Image</code></td>
-<td><code>list</code></td>
-</tr>
-</tbody></table>
+
+### Bokeh effect using Rockets
+
+> Bokeh effect using Rockets
+
+```python
+from PIL import Image, ImageFilter
+from rocketbase import Rocket
+
+# load an image using PIL
+image_path = 'selfie.png'
+img = Image.open(image_path).convert('RGB')
+
+# land the Rocket
+rocket = 'lucas/deeplabv2'
+model = Rocket.land(rocket).eval()
+
+# process the image with our Rocket
+with torch.no_grad():
+    img_tensor = model.preprocess(img)
+    out = model(img_tensor)
+    output_tensor = model.postprocess(out, img)
+
+# get the mask for person
+for elem in output_tensor:
+  if elem['class_name'] == 'Person':
+    mask = elem['class_confidence_2d_array']
+    break
+
+# threshold mask
+mask[mask > 0.5] = 1.0
+mask[mask < 1.0] = 0.0
+mask = mask.astype(np.uint8)
+
+# separate input image in foreground/ background
+img_np = np.asarray(img)
+fg = img_np[mask]
+bg = img_np[1-mask]
+
+# blur background
+bg = Image.fromarray(bg)
+bg = bg.filter(ImageFilter.GaussianBlur(15))
+
+# stich together image
+fg = np.asarray(fg)
+bg = np.asarray(bg)
+
+img = fg[mask] + bg[1-mask]
+img = Image.fromarray(img)
+
+# save bokeh image
+img.save('selfie_bokeh.png')
+```
+
+In this example we want to create a so called `bokeh` effect as used by the newer smartphones and video chats. The goal is simply to blur the background of an image. We can do this by using a Rocket to get the segmentation mask of the person in foreground (for simplicity we assume only one person in the image). Once we have obtained this mask we can use it to add blur to the part of the image not containing the person which mostly will be the background of the image.
+
+<img src="images/bokeh-effect-illustration.png" alt="Bokeh effect illustration" />
+
+## Image Human Pose Estimation
+
+In pose estimation we try to predict the pose of an entity in a scene. A typical use case is the prediction of the human body pose in an image. Pose estimation can be used for various use cases such as recognizing what a person currently is doing. 
+
+**Input and Output**
+Pose estimation Rockets use a single Image as input and return a list of found human poses in an image. By default the Rocket returns you a list of joints after post processing. You can also set the `visualize=True` flag to get more visual feedback which is especially useful for debugging.
+
+|input of preprocess|output of postprocess|
+|--------|------------|
+|`PIL.Image` | `list` |
+
+ -->
 <h2 id='image-style-transfer'>Image Style Transfer</h2>
 <p>Image Style transfer Rockets can be used to transfer the style of an input <code>image A</code> to match the style of <code>image B</code>. The type of style varies depending on the specific Rocket. A style transformation can range from a simple color transformation up to replacing complete faces.</p>
 
