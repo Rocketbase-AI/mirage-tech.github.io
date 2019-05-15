@@ -1,5 +1,5 @@
 ---
-title: RocketBase Documentation
+title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - python
@@ -16,11 +16,26 @@ search: true
 
 <%= image_tag "images/rocketbase-illustration.jpg" %>
 
-# Documentation
+<aside class="warning">
+Alpha - RocketBase.ai and the Rockets provided throught it are still in developments. Use at your own risks.
+</aside>
 
-## Introduction
-Welcome to **RocketBase** documentation. 
-Here you will find information on how to use RocketBase library and how to use our pre-trained Rockets.
+# Introduction
+
+Welcome to **RocketBase.ai**. 
+Here you will find everything you need to know about Rockets :)
+
+# Getting Started with RocketBase
+This guide shows you how to install and run Rockets using RocketBase. 
+
+
+***Coming soon:***
+
+* *Transfer learning with Rockets*
+* *Using Rockets on iOS and Android*
+
+## The RocketBase PIP package
+To easily access and manage Rockets we provide a python PIP package. This package provides you with the methods to `land` and `launch` Rockets.
 
 ### Landing a Rocket
 
@@ -36,22 +51,17 @@ The land method has two parameters, first you need to define the `Rocket Slug` t
 
 
 ### Launching a Rocket
-At some point you might want to modify the landed Rocket or even create your own Rocket. You can push your new Rocket to the RocketBase.ai platform by using the launch functionality of the PIP package. This feature is in private beta at the moment. We will notify you when you can start using it. If you would like to join the private beta please send us an email at [rocketbase@mirage.id](mailto:rocketbase@mirage.id).
+At some point you might want to modify the landed Rocket or even create your own Rocket. You can push your new Rocket to the RocketBase.ai platform by using the launch functionality of the PIP package. This feature is in private beta at the moment. We will notify you when you can start using it. If you would like to join the private beta please send us an email at [hello@mirage.id](mailto:hello@mirage.id).
 
 
 <aside class="notice">
 Don't forget to replace <b>username/modelName</b> with the slug of the desired Rocket
 </aside>
 
-***Features coming soon:***
-
-* *Transfer learning with Rockets*
-* *Using Rockets on iOS and Android*
-
 ## Installation
 The RocketBase python package works with `Python 3.6+` and is built on the `PyTorch` deep learning framework.
 
-To install RocketBase you must first [install PIP](https://pip.pypa.io/en/stable/installing/).
+To install RocketBase you must [install PIP](https://pip.pypa.io/en/stable/installing/), the python package manager, first.
 
 After that, you can install the RocketBase PIP package using the following command in your terminal:
 
@@ -93,6 +103,11 @@ A Rocket is a Deep Learning container packaging a standardized and independent d
 On RocketBase.ai you will find already built and pretrained Rockets for the most common use cases in computer vision. 
 
 Each Rocket belongs to a Rocket family such as object detection, image classification, style transfer etc.
+
+<aside class="notice">
+You must install the RocketBase PIP package first to run the examples
+</aside>
+
 
 ## What is part of a Rocket?
 
@@ -521,16 +536,62 @@ In this example we want to create a so called `bokeh` effect as used by the newe
 
 ## Image Human Pose Estimation
 
-In pose estimation we try to predict the pose of an entity in a scene. A typical use case is the prediction of the human body pose in an image. Pose estimation can be used for various use cases such as recognizing what a person currently is doing. 
+In pose estimation we try to predict the pose of one or multiple entities in a scene. A typical use case is the prediction of the human body pose in an image. Pose estimation can be used for various use cases such as recognizing what a person is currently doing. 
 
 **Input and Output**
-Pose estimation Rockets use a single Image as input and return a list of found human poses in an image. By default the Rocket returns you a list of joints after post processing. You can also set the `visualize=True` flag to get more visual feedback which is especially useful for debugging.
+
+Pose estimation Rockets use a single Image as input and return a list of found human poses in an image. By default the Rocket returns you a list detected entities with their keypoints after post processing. You can also set the `visualize=True` flag to get more visual feedback which is especially useful for debugging.
 
 |input of preprocess|output of postprocess|
 |--------|------------|
 |`PIL.Image` | `list` |
 
+Each entity is definied by a dictionary containing all the keypoints found by the Rocket belonging to the entity. Then each keypoint is dictionary containing the score confidence and the x, y coordinated of the keypoints on the input image.
 
+> Output of Pose-Estimation Rocket
+
+```json
+[
+  {
+    "Nose": {
+      "x": 523.125,
+      "y": 153.75,
+      "confidence": 0.7959219217300415
+    },
+    "LKnee": {
+      "x": 560.625,
+      "y": 116.25,
+      "confidence": 0.3610687255859375
+    },...
+  },...
+]
+```
+There are different way to represent a human pose defined on the number and position of the keypoints. We are using a 18 keypoints representation.
+
+**18 Keypoints Pose**
+
+| Name | Description |
+|------|-------------|
+|`Nose`| Nose |
+|`Neck`| Neck |
+|`RShoulder`| Right Shoulder |
+|`RElbow`| Right Elbow |
+|`RWrist`| Right Wrist |
+|`LShoulder`| Left Shoulder |
+|`LElbow`| Left Elbow |
+|`LWrist`| Left Wrist |
+|`RHip`| Right Hip |
+|`RKnee`| Right Knee |
+|`RAnkle`| Right Ankle |
+|`LHip`| Left Hip |
+|`LKnee`| Left Knee |
+|`LAnkle`| Left Ankle |
+|`REye`| Right Eye |
+|`LEye`| Left Eye |
+|`REar`| Right Ear |
+|`LEar`| Left Ear |
+
+<%= image_tag "images/18-Keypoints-Pose.png" %>
 
 ## Image Style Transfer
 
